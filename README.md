@@ -15,8 +15,8 @@ const defaultNetwork = "rinkeby";
 const targetNetwork = NETWORKS.rinkeby;
 ```
 
-- 配置私钥    
-在部署合约之前, 需要配置下私钥
+- 配置私钥和 INFURA_ID  
+在部署合约之前, 需要进行如下配置下
 ```shell
 ## 进入 hardhat 目录
 cd hardhat
@@ -25,15 +25,21 @@ cd hardhat
 cp .env.example .env
 
 ## 在 .env 文件中配置 INFURA_ID 和 PRIVATE_KEY
-## 其中 PRIVATE_KEY 可以从 metaMask 中获取 
-## INFURA_ID 需要登陆 INFURA 账号, 
+## 其中 PRIVATE_KEY 可以从 metaMask 中获取, 同时需要保证私钥对应账户有充足的 ETH 
+## INFURA_ID 需要登陆 INFURA 账号进行获取
 
 PRIVATE_KEY=xxxxxxxxxxxxxxxx  
 INFURA_ID=yyyyyyyy
-```
+```  
 
-- 充值  
-上一步在 .env 中配置账号私钥需要保证有充足的 ETH, 如果 ETH 不足, 可以在测试网上进行充值
+- 安装依赖   
+```shell
+## 进入到 jolycao-MOH 根目录
+cd jolycao-MOH
+
+## 执行 yarn 安装相应的依赖  
+yarn
+```
 
 - 合约部署  
 执行如下命令, 进行合约部署  
