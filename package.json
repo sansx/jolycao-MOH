@@ -1,0 +1,34 @@
+{
+  "name": "jolycao-MOH",
+  "version": "1.0.0",
+  "description": "sss",
+  "main": "index.js",
+  "scripts": {
+    "test": "yarn workspace hardhat test",
+    "start": "yarn workspace react-app start",
+    "compile": "yarn workspace hardhat compile",
+    "deploy": "yarn workspace hardhat deploy"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/yingjingyang/jolycao-MOH.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/yingjingyang/jolycao-MOH/issues"
+  },
+  "private": true,
+  "homepage": "https://github.com/yingjingyang/jolycao-MOH#readme",
+  "workspaces": {
+    "packages": [
+      "hardhat",
+      "react-app"
+    ],
+    "nohoist": [
+      "hardhat",
+      "hardhat/**"
+    ]
+  }
+}
