@@ -7,7 +7,8 @@
     "test": "yarn workspace hardhat test",
     "start": "yarn workspace react-app start",
     "compile": "yarn workspace hardhat compile",
-    "deploy": "yarn workspace hardhat deploy"
+    "deploy": "yarn workspace hardhat deploy",
+    "replace": "yarn workspace hardhat replace"
   },
   "repository": {
     "type": "git",

@@ -3,6 +3,12 @@
 Dapp-Learning-MOH 项目旨在提供发放 Dapp-Learning 的荣誉勋章的功能模版, 社区开发者可以根据此模版进行修改升级, 以实现符合自身业务的功能需求. 
 
 ## 操作步骤  
+- 安装 elixir  
+以 macos 为例, 其他操作系统可参考 [elixir 官网](https://elixir-lang.org/install.html#macos)
+```
+brew install elixir
+```
+
 - 修改部署网络  
 1. 默认合约是部署在测试网络, 如果需要部署在其他网络, 需要修改合约部署脚本.  
 如下, 在 hardhat.config.js 文件中有如下配置, 修改 "defaultNetwork" 的网络值就可以指定合约所要部署的网络 
@@ -45,6 +51,12 @@ yarn
 执行如下命令, 进行合约部署  
 ```
 yarn deploy
+```
+
+- 替换合约地址   
+MOH 合约为可升级合约, 所以我们不能直接和 MOH 合约进行交互, 需要和代理合约进行交互. 这里, 修改 MOH 合约地址为代理合约地址  
+```
+yarn replace
 ```
 
 - 启动前端  

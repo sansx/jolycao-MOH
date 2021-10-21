@@ -65,7 +65,6 @@ export default function useContractLoader(providerOrSigner, config = {}) {
           const providerNetwork = await provider.getNetwork();
 
           const _chainId = config.chainId || providerNetwork.chainId;
-          console.log("_chainId======",_chainId)
 
           let contractList = {};
           let externalContractList = {};
@@ -104,6 +103,7 @@ export default function useContractLoader(providerOrSigner, config = {}) {
               config.customAddresses && Object.keys(config.customAddresses).includes(contractName)
                 ? config.customAddresses[contractName]
                 : combinedContracts[contractName].address;
+                console.log("_address====",_address);
             accumulator[contractName] = new ethers.Contract(_address, combinedContracts[contractName].abi, signer);
             return accumulator;
           }, {});
