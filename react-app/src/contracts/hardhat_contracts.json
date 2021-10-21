@@ -5,7 +5,7 @@
       "chainId": "4",
       "contracts": {
         "N": {
-          "address": "0xb9DEF7fB5d86640AD4d1a8DDC86dB401D338F78d",
+          "address": "0x76567b34a2e86A69cd5Ab128120aDbDdEa7A8c4f",
           "abi": [
             {
               "anonymous": false,
@@ -779,7 +779,7 @@
           ]
         },
         "TransparentUpgradeableProxyMOH": {
-          "address": "0xb9DEF7fB5d86640AD4d1a8DDC86dB401D338F78d",
+          "address": "0x76567b34a2e86A69cd5Ab128120aDbDdEa7A8c4f",
           "abi": [
             {
               "inputs": [

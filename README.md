@@ -9,6 +9,34 @@ Dapp-Learning-MOH 项目旨在提供发放 Dapp-Learning 的荣誉勋章的功�
 brew install elixir
 ```
 
+- 安装 && 启动 postgresql   
+可参考 [教程](https://www.runoob.com/postgresql/mac-install-postgresql.html) 进行对应安装.  
+注意这里安装 postgresql 的时候需要设置 postgresql 用户密码为 postgresql , 避免影响后续本地 nft-parser 服务启动. 
+
+- 启动 nft-parser 服务  
+如果不想使用 nft-parser 本地服务, 可以跳过此步骤, 但需要在启动 react 前修改 react 配置, 后续有相应说明  
+```shell 
+## 进入到 nft-parser 目录
+cd nft-parser 
+
+## 安装对应依赖  
+mix deps.get
+
+## 更新 
+mix deps.update --all
+
+## 安装数据库 
+mix ecto.setup 
+
+## 安装 assets 依赖 
+cd assets 
+yarn
+
+## 启动服务 
+cd ..
+mix phx.server
+```
+
 - 修改部署网络  
 1. 默认合约是部署在测试网络, 如果需要部署在其他网络, 需要修改合约部署脚本.  
 如下, 在 hardhat.config.js 文件中有如下配置, 修改 "defaultNetwork" 的网络值就可以指定合约所要部署的网络 
@@ -40,7 +68,7 @@ INFURA_ID=yyyyyyyy
 
 - 安装依赖   
 ```shell
-## 进入到 jolycao-MOH 根目录
+## 进入到项目根目录
 cd jolycao-MOH
 
 ## 执行 yarn 安装相应的依赖  
@@ -59,12 +87,23 @@ MOH 合约为可升级合约, 所以我们不能直接和 MOH 合约进行交互
 yarn replace
 ```
 
-- 启动前端  
-执行如下命令启动前端  
+- 配置 react 环境变量  
+```
+cd react-app
+cp .sample.env .env
+```
+
+- 启动 react 
+这里需要注意, 如果没有启动 nft-parser 本地服务, 则需要修改 react-app/App.jsx 文件中 backend 变量为如下值
+```shell
+const backend = "https://taishang.leeduckgo.com/taishang/api/v1/parse?handler_id=1&type=n";
+```
+
+然后执行如下命令启动前端  
 ```
 yarn start
 ```
 
 - Mint NFT  
-前端界面上选择 "Contract Interactor", 然后在 claim 中输入 NFT id , 之后点击 "Send" 
+前端界面上选择 "Contract Interactor", 然后在 claim 中输入 target address 和 NFT id , 之后点击 "Send" 
 ![Contract-Interactor](./images/Contract-Interactor.png)

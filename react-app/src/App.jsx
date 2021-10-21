@@ -50,7 +50,7 @@ if (DEBUG) console.log("🏠 Connecting to provider:", localProviderUrlFromEnv);
 const localProvider = new ethers.providers.StaticJsonRpcProvider(localProviderUrlFromEnv);
 
 // IMPORTANT PLACE
-const backend = "https://taishang.leeduckgo.com/taishang/api/v1/parse?handler_id=1&type=n";
+const backend = "http://127.0.0.1:4000/taishang/api/v1/parse?handler_id=1&type=n";
 const baseURL = process.env.REACT_APP_BASE_URL;
 
 // 🔭 block explorer URL
