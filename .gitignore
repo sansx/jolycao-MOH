@@ -5,3 +5,4 @@ node_modules
 cache
 artifacts
 **/deployments
+**/hardhat_contracts.json
