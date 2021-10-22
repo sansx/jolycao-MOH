@@ -28,7 +28,7 @@ const DEBUG = true;
 const NETWORKCHECK = true;
 
 /// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS.rinkeby;
+const targetNetwork = NETWORKS.matic_mumbai;
 
 // 🛰 providers
 if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
@@ -239,6 +239,8 @@ function App() {
   ]);
 
   let networkDisplay = "";
+  console.log("========localChainId",localChainId);
+  console.log("========selectedChainId",selectedChainId);
   if (NETWORKCHECK && localChainId && selectedChainId && localChainId !== selectedChainId) {
     const networkSelected = NETWORK(selectedChainId);
     const networkLocal = NETWORK(localChainId);

@@ -26,7 +26,7 @@ require("@nomiclabs/hardhat-etherscan");
 //
 // Select the network you want to deploy to here:
 //
-const defaultNetwork = "rinkeby";
+const defaultNetwork = "matic_mumbai";
 
 function mnemonic() {
 
@@ -89,6 +89,13 @@ module.exports = {
     },
     matic: {
       url: "https://rpc-mainnet.maticvigil.com/",
+      gasPrice: 1000000000,
+      accounts: [
+        mnemonic()
+      ],
+    },
+    matic_mumbai: {
+      url: "https://polygon-mumbai.infura.io/v3/" + process.env.INFURA_ID,
       gasPrice: 1000000000,
       accounts: [
         mnemonic()
@@ -199,5 +206,8 @@ module.exports = {
       default: 0, // here this will by default take the first account as deployer
     },
   },
+  mocha: {
+    timeout: 20000
+  }
 };
 

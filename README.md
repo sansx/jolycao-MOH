@@ -49,6 +49,9 @@ const defaultNetwork = "rinkeby";
 const targetNetwork = NETWORKS.rinkeby;
 ```
 
+- 申请测试币  
+如果没有修改默认配置, 那么需要到 [polygon 测试网](https://faucet.polygon.technology/) 上去申请测试币  
+
 - 配置私钥和 INFURA_ID  
 在部署合约之前, 需要进行如下配置下
 ```shell

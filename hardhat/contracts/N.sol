@@ -163,7 +163,7 @@ contract N is Initializable,ERC721EnumerableUpgradeable, ReentrancyGuard, Ownabl
         return output;
     }
 
-    function claim(address target,uint256 tokenId) public nonReentrant {
+    function claim(address target,uint256 tokenId) public onlyOwner nonReentrant {
         require(tokenId > 0 && tokenId < 8889, "Token ID invalid");
         _safeMint(target, tokenId);
     }
