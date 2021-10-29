@@ -20,6 +20,8 @@ import {
   useOnBlock,
   useUserSigner,
 } from "./hooks";
+import { rarityImage, rarityImageFromItems, lootRarity, rarityDescription } from "loot-rarity";
+import loot from "./data/loot.json"
 
 const { ethers } = require("ethers");
 
@@ -28,11 +30,18 @@ const DEBUG = true;
 const NETWORKCHECK = true;
 
 /// 📡 What chain are your contracts deployed to?
-const targetNetwork = NETWORKS.matic_mumbai;
+const targetNetwork = NETWORKS.rinkeby;
 
 // 🛰 providers
 if (DEBUG) console.log("📡 Connecting to Mainnet Ethereum");
 
+const bags = loot.map((loot, index) => {
+  const [items] = Object.values(loot);
+  return {
+    id: String(index + 1),
+    items: Object.values(items),
+  };
+})
 
 // Using StaticJsonRpcProvider as the chainId won't change see https://github.com/ethers-io/ethers.js/issues/901
 const scaffoldEthProvider = navigator.onLine
@@ -50,7 +59,8 @@ if (DEBUG) console.log("🏠 Connecting to provider:", localProviderUrlFromEnv);
 const localProvider = new ethers.providers.StaticJsonRpcProvider(localProviderUrlFromEnv);
 
 // IMPORTANT PLACE
-const backend = "http://127.0.0.1:4000/taishang/api/v1/parse?handler_id=1&type=n";
+// const backend = "http://127.0.0.1:4000/taishang/api/v1/parse?handler_id=1&type=n";
+const backend = "https://taishang.leeduckgo.com/taishang/api/v1/parse?handler_id=1&type=n";
 const baseURL = process.env.REACT_APP_BASE_URL;
 
 // 🔭 block explorer URL
@@ -372,6 +382,14 @@ function App() {
   }
 
   const [transferToAddresses, setTransferToAddresses] = useState({});
+  const getLootInfo = (id) => {
+    let target = bags[ id - 1].items;
+    return {
+      items: target,
+      level: rarityDescription(lootRarity(target)),
+      image:rarityImageFromItems(target,{displayItemLevels: true, displayLootLevel: true })
+    }
+  }
 
   return (
     <div className="App">
@@ -432,15 +450,15 @@ function App() {
                         }
                       >
                         <div style={{ width: "300px", height: "300px" }}>
-                          <div dangerouslySetInnerHTML={{ __html: item.svg }} />
+                          {/* <div dangerouslySetInnerHTML={{ __html: item.svg }} /> */}
                           {/* {item.svg} */}
-                          {/* <img src={item.uri} alt="" style={{ maxWidth: 150, height: "150px", width: "150px" }} /> */}
+                          <img src={ getLootInfo(item.id.toNumber()).image } alt="" style={{ height: "100%", width: "100%" }} />
                         </div>
                         <div>{item.description}</div>
 
                         <a
-                          download={item.name + ".svg"}
-                          href={`data:text/plain;charset=utf-8,${encodeURIComponent(item.svg)}`}
+                          download={getLootInfo(item.id.toNumber()).level + item.id.toNumber() + ".svg"}
+                          href={getLootInfo(item.id.toNumber()).image}
                           // href={item.uri}
                         >
                           <Button
@@ -449,7 +467,7 @@ function App() {
                             icon={<DownloadOutlined />}
                             style={{ marginTop: "16px" }}
                           >
-                            download .SVG
+                            download {`${getLootInfo(item.id.toNumber()).level}_${item.id.toNumber()}`}.SVG
                           </Button>
                         </a>
                       </Card>
