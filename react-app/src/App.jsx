@@ -60,8 +60,8 @@ const localProvider = new ethers.providers.StaticJsonRpcProvider(localProviderUr
 
 // IMPORTANT PLACE
 // const backend = "http://127.0.0.1:4000/taishang/api/v1/parse?handler_id=1&type=n";
-const backend = "https://taishang.leeduckgo.com/taishang/api/v1/parse?handler_id=1&type=n";
-const baseURL = process.env.REACT_APP_BASE_URL;
+// const backend = "https://taishang.leeduckgo.com/taishang/api/v1/parse?handler_id=1&type=n";
+// const baseURL = process.env.REACT_APP_BASE_URL;
 
 // 🔭 block explorer URL
 const blockExplorer = targetNetwork.blockExplorer;
@@ -169,39 +169,11 @@ function App() {
           const tokenURI = await readContracts.N.tokenURI(tokenId);
           console.log("tokenURI", tokenURI);
           // TODO: Optimize
-          let svg;
           // const svg = get_svg(tokenURI);
           // const svg = decodeTokenURI(tokenURI);
           // const ipfsHash = tokenURI.replace("https://ipfs.io/ipfs/", "");
           // console.log("ipfsHash", ipfsHash);
-          axios({
-            method: "post",
-            url: backend,
-            data: {
-              token_uri: tokenURI,
-              base_url: baseURL,
-            },
-            headers: {
-              "Content-Type": "application/json",
-            },
-          })
-            .then(response => {
-              svg = window.atob(response.data.result.image);
-
-              console.log(svg);
-              try {
-                // const jsonManifest = JSON.parse(jsonManifestBuffer.toString());
-                // console.log("jsonManifest", jsonManifest);
-                collectibleUpdate.push({ id: tokenId, uri: tokenURI, svg, owner: address });
-              } catch (e) {
-                console.log(e);
-              }
-            })
-            .catch(error => {
-              console.log(error);
-            });
-
-          // const jsonManifestBuffer = await getFromIPFS(ipfsHash);
+          collectibleUpdate.push({ id: tokenId, uri: tokenURI, owner: address });
         } catch (e) {
           console.log(e);
         }
@@ -438,7 +410,7 @@ function App() {
                 bordered
                 dataSource={Ns}
                 renderItem={item => {
-                  console.log(item);
+                  // console.log(item);
                   const id = item.id.toNumber();
                   return (
                     <List.Item key={id + "_" + item.uri + "_" + item.owner}>
